@@ -1,0 +1,55 @@
+<div class="sidebar__container">
+  <nav class="sidebar" [ngClass]="{'collapsed': isCollapsed}">
+      <div class="sidebar__isCollapsed" *ngIf="isCollapsed">
+          <button (click)="toggleSidebar()"><i class="fas fa-caret-right"></i></button>
+      </div>
+      <div class="sidebar__links__notCollapsed" *ngIf="!isCollapsed">
+          <div class="sidebar__menu-button">
+            <h3>MENU</h3>
+            <div class="sidebar__notCollapsed">
+              <button (click)="toggleSidebar()"><i class="fas fa-caret-left"></i></button>
+            </div>
+          </div>
+          <hr>
+          <ul>
+              <li>
+                  <button routerLink="/home/contacts">
+                    <i class="fa-solid fa-address-book" alt="contacts_icone"></i>
+                  </button>
+                  <a routerLink="/home/contacts">Contatos</a>
+              </li>
+              <li>
+                <button routerLink="/home/change-password">
+                  <i class="fa-solid fa-lock" alt="change_password_icone"></i>
+                </button>
+                <a routerLink="/home/change-password">Alterar senha</a>
+              </li>
+              <li>
+                  <button (click)="logout()">
+                    <i class="fa-solid fa-door-open" alt="exit_icone"></i>
+                  </button>
+                  <a routerLink="/login" (click)="logout()">Sair</a>
+              </li>
+          </ul>
+      </div>
+      <div class="sidebar__links__isCollapsed" *ngIf="isCollapsed">
+          <ul>
+              <li>
+                  <button mat-raised-button matTooltip="Contacts" matTooltipPosition="right" routerLink="/home/contacts">
+                    <i class="fa-solid fa-address-book" alt="contacts_icone"></i>
+                  </button>
+              </li>
+              <li>
+                  <button mat-raised-button matTooltip="Alterar senha" matTooltipPosition="right" routerLink="/home/change-password">
+                    <i class="fa-solid fa-lock" alt="change_password_icone"></i>
+                  </button>
+              </li>
+              <li>
+                  <button mat-raised-button matTooltip="Sair" matTooltipPosition="right" (click)="logout()">
+                    <i class="fa-solid fa-door-open" alt="exit_icone"></i>
+                  </button>
+              </li>
+          </ul>
+      </div>
+  </nav>
+</div>

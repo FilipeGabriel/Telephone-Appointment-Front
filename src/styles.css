@@ -15,3 +15,6 @@ body {
   width: 100vw;
   background: linear-gradient(180deg, rgba(42, 123, 155, 1) 0%, rgba(11, 56, 84, 1) 0%, rgba(42, 123, 155, 1) 100%);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
