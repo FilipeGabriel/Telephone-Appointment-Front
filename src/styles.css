@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: outfit;
+  src: url("../src/assets/fonts/Outfit-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: outfit;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, rgba(42, 123, 155, 1) 0%, rgba(11, 56, 84, 1) 0%, rgba(42, 123, 155, 1) 100%);
+}

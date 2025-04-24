@@ -1,0 +1,81 @@
+.login__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background-color: #E2E4E5;
+  top: -60px;
+  width: 45%;
+  min-width: 250px;
+  max-width: 350px;
+  border-radius: 20px;
+  border: 0;
+}
+
+.card-title {
+  padding-top: 20px;
+  border: 0;
+}
+
+.card-title > h2 {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: #037e86;
+}
+
+.card-body {
+  color: #037e86;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 15px 15px;
+}
+
+.login__fields {
+  width: 75%;
+}
+
+.login__fields > label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.login__fields > input {
+  margin-bottom: 15px;
+  border: 0;
+  box-shadow: inset -5px 33px 17px -40px rgba(0,0,0,1);
+}
+
+.login__button-login {
+  padding: 30px 15px;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+.login__button-login > button {
+  width: 100%;
+  color: white;
+}
+
+.card-footer {
+  background-color: #037e86;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0px 15px;
+  border: 0;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.card-footer > a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+}

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "telephone_appointment_front": {
+    "phone_book_front": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/telephone_appointment_front",
+            "outputPath": "dist/phone_book_front",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -25,9 +25,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -57,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "telephone_appointment_front:build:production"
+              "buildTarget": "phone_book_front:build:production"
             },
             "development": {
-              "buildTarget": "telephone_appointment_front:build:development"
+              "buildTarget": "phone_book_front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "telephone_appointment_front:build"
+            "buildTarget": "phone_book_front:build"
           }
         },
         "test": {
