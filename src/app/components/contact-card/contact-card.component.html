@@ -1,0 +1,50 @@
+<div class="contact-card__container">
+  <div class="card__shadow"></div>
+  <div class="div__card" (click)="openModal()">
+    <div class="line-two__card">
+      <span>{{ contactForm.value.contactName }}</span>
+    </div>
+    <div class="line-three__card">
+      <span>{{ contactForm.value.contactCellPhone }}</span>
+    </div>
+  </div>
+  <div class="modal" *ngIf="isModalVisible">
+    <div class="modal__content">
+      <div class="line-one__modal">
+        <h3>Editar Contato</h3>
+      </div>
+      <form [formGroup]="contactForm" class="modal-form">
+        <div class="modal__fields">
+          <div class="div__field">
+            <label for="contactName">Nome: *</label>
+            <input id="contactName" formControlName="contactName" type="text" />
+          </div>
+          <div class="div__field">
+            <label for="contactEmail">Email:</label>
+            <input id="contactEmail" formControlName="contactEmail" type="email" />
+          </div>
+          <div class="div__field">
+            <label for="contactCellPhone">Celular:</label>
+            <input id="contactCellPhone" formControlName="contactCellPhone" type="text" />
+          </div>
+          <div class="div__field">
+            <label for="contactTelephone">Telefone:</label>
+            <input id="contactTelephone" formControlName="contactTelephone" type="text" />
+          </div>
+          <div class="div__field check">
+            <label for="contactFavorite">Favorito</label>
+            <input type="checkbox" formControlName="contactYNFavorite" />
+          </div>
+          <div class="div__field check">
+            <label for="contactActive">Ativo</label>
+            <input type="checkbox" formControlName="contactYNActive" />
+          </div>
+        </div>
+        <div class="div__down">
+          <button type="button" class="btn btn-primary" (click)="saveChanges()">Salvar</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -10,13 +10,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
+
 export class SidebarComponent implements OnInit{
 
   isCollapsed = false;
   reducedScreen = false
 
   constructor(
-      //private authService: AuthService,
       private router: Router
   ) { }
 
@@ -40,7 +40,6 @@ export class SidebarComponent implements OnInit{
   }
 
   logout() {
-      //this.authService.logout();
       this.router.navigate(['/login']);
   }
 

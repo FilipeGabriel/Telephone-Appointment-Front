@@ -1,0 +1,57 @@
+<div class="contact-list__container">
+  <div class="contact-list__body">
+      <div class="cards">
+          <div class="div__add-card">
+              <div class="card__shadow"></div>
+              <div class="div__card" (click)="openModal()">
+                  <div class="line-one__card">
+                      <span>Adicionar Novo</span>
+                  </div>
+              </div>
+          </div>
+          <app-contact-card *ngFor="let contact of contacts"
+                            [contact]="contact"
+                            (contactUpdated)="handleContactUpdated($event)">
+          </app-contact-card>
+      </div>
+  </div>
+  <div class="modal" *ngIf="isModalVisible">
+      <div class="modal__content">
+          <div class="line-one__modal">
+              <h3>Adicionar Novo Contato</h3>
+          </div>
+          <div class="line-two__modal">
+              <div class="div__field">
+                  <label for="contactName">Nome: *</label>
+                  <input type="text" id="contactName" [(ngModel)]="newContact.contactName" placeholder="Nome do Contato" />
+              </div>
+              <div class="div__field">
+                  <label for="contactEmail">Email: *</label>
+                  <input type="email" id="contactEmail" [(ngModel)]="newContact.contactEmail" placeholder="Email" />
+              </div>
+              <div class="div__field">
+                  <label for="contactCellPhone">Celular: *</label>
+                  <input type="text" id="contactCellPhone" [(ngModel)]="newContact.contactCellPhone" placeholder="Celular" />
+              </div>
+              <div class="div__field">
+                  <label for="contactTelephone">Telefone: *</label>
+                  <input type="text" id="contactTelephone" [(ngModel)]="newContact.contactTelephone" placeholder="Telefone" />
+              </div>
+              <div class="div__field check">
+                  <label for="contactFavorite">Favorito: *</label>
+                  <input type="checkbox" id="contactFavorite" [(ngModel)]="newContact.contactYNFavorite" />
+              </div>
+              <div class="div__field check">
+                  <label for="contactActive">Ativo: *</label>
+                  <input type="checkbox" id="contactActive" [(ngModel)]="newContact.contactYNActive" />
+              </div>
+          </div>
+          <div class="line-three__modal">
+              <div class="div__down">
+                  <button class="btn btn-primary" (click)="saveContact()">Salvar</button>
+                  <button class="btn btn-secondary close" (click)="closeModal()">Cancelar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
