@@ -1,18 +1,40 @@
 <div class="contact-card__container">
   <div class="card__shadow"></div>
-  <div class="div__card" (click)="openModal()">
-    <div class="line-two__card">
-      <span>{{ contactForm.value.contactName }}</span>
+  <div class="div__card" [ngClass]="{
+      'inactive-card': contactForm.value.contactYNActive === 0
+  }" (click)="openModal()">
+    <div class="line-one__card">
+      <div class="line-one__data" [ngClass]="{
+        'inactive-card-title': contactForm.value.contactYNActive === 0
+      }">
+        <i class="fa-solid fa-star" [ngStyle]="{
+              color: contactForm.value.contactYNFavorite === 1 ? '#fff200' : '#494747'
+            }"></i>
+        <span>{{ contactForm.value.contactName }}</span>
+      </div>
     </div>
-    <div class="line-three__card">
+    <div class="line-two__card data-format">
+      <i class="fa-solid fa-mobile-screen"></i>
       <span>{{ contactForm.value.contactCellPhone }}</span>
     </div>
+    <hr>
+    <div class="line-three__card data-format">
+      <i class="fa-solid fa-phone"></i>
+      <span>{{ contactForm.value.contactTelephone }}</span>
+    </div>
+    <hr>
+    <div class="line-four__card data-format">
+      <i class="fa-solid fa-envelope-open-text"></i>
+      <span>{{ contactForm.value.contactEmail }}</span>
+    </div>
+    <hr>
   </div>
   <div class="modal" *ngIf="isModalVisible">
     <div class="modal__content">
       <div class="line-one__modal">
         <h3>Editar Contato</h3>
       </div>
+      <hr>
       <form [formGroup]="contactForm" class="modal-form">
         <div class="modal__fields">
           <div class="div__field">
@@ -24,7 +46,7 @@
             <input id="contactEmail" formControlName="contactEmail" type="email" />
           </div>
           <div class="div__field">
-            <label for="contactCellPhone">Celular:</label>
+            <label for="contactCellPhone">Celular: *</label>
             <input id="contactCellPhone" formControlName="contactCellPhone" type="text" />
           </div>
           <div class="div__field">

@@ -38,7 +38,7 @@ export class ContactListComponent implements OnInit {
         contactCellPhone: '1234567890',
         contactTelephone: '9876543210',
         contactYNFavorite: 1,
-        contactYNActive: 1,
+        contactYNActive: 0,
         contactDTRegistration: new Date().toISOString()
       },
       {
@@ -48,7 +48,7 @@ export class ContactListComponent implements OnInit {
         contactCellPhone: '2345678901',
         contactTelephone: '8765432109',
         contactYNFavorite: 0,
-        contactYNActive: 1,
+        contactYNActive: 0,
         contactDTRegistration: new Date().toISOString()
       },
       {
@@ -58,7 +58,17 @@ export class ContactListComponent implements OnInit {
         contactCellPhone: '3456789012',
         contactTelephone: '7654321098',
         contactYNFavorite: 0,
-        contactYNActive: 0,
+        contactYNActive: 1,
+        contactDTRegistration: new Date().toISOString()
+      },
+      {
+        contactId: 4,
+        contactName: 'Carlos Souza',
+        contactEmail: 'carlos.souza@example.com',
+        contactCellPhone: '3456789012',
+        contactTelephone: '7654321098',
+        contactYNFavorite: 1,
+        contactYNActive: 1,
         contactDTRegistration: new Date().toISOString()
       }
     ];

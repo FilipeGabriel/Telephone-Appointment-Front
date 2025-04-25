@@ -26,8 +26,8 @@ export class ContactCardComponent implements OnInit {
       contactEmail: [this.contact.contactEmail || ''],
       contactCellPhone: [this.contact.contactCellPhone || ''],
       contactTelephone: [this.contact.contactTelephone || ''],
-      contactYNFavorite: [this.contact.contactYNFavorite || false],
-      contactYNActive: [this.contact.contactYNActive || false],
+      contactYNFavorite: [this.contact.contactYNFavorite || 0],
+      contactYNActive: [this.contact.contactYNActive || 0],
       contactDtRegistration: [this.contact.contactDtRegistration || new Date()]
     });
   }
