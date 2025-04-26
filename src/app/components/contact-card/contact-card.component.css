@@ -1,3 +1,9 @@
+
+input::placeholder {
+  color: #a1a0a0;
+  font-size: 12px;
+}
+
 .contact-card__container {
   position: relative;
   padding-left: 20px;

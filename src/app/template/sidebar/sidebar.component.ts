@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,30 +18,32 @@ export class SidebarComponent implements OnInit{
   reducedScreen = false
 
   constructor(
-      private router: Router
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-      this.checkScreenWidth();
+    this.checkScreenWidth();
   }
 
   @HostListener('window:resize', ['$event'])onResize() {
-      this.checkScreenWidth();
+    this.checkScreenWidth();
   }
 
   checkScreenWidth() {
-      this.reducedScreen = window.innerWidth < 900;
-      if (this.reducedScreen) {
-        this.isCollapsed = true;
-      }
+    this.reducedScreen = window.innerWidth < 900;
+    if (this.reducedScreen) {
+      this.isCollapsed = true;
+    }
   }
 
   toggleSidebar() {
-      this.isCollapsed = !this.isCollapsed;
+    this.isCollapsed = !this.isCollapsed;
   }
 
   logout() {
-      this.router.navigate(['/login']);
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 

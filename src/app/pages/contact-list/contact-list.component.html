@@ -12,11 +12,11 @@
           </div>
           <app-contact-card *ngFor="let contact of contacts"
                             [contact]="contact"
-                            (contactUpdated)="handleContactUpdated($event)">
+                            (contactUpdated)="getContactList()">
           </app-contact-card>
       </div>
   </div>
-  <div class="modal" *ngIf="isModalVisible">
+  <div class="modal" *ngIf="isModalVisible" [formGroup]="contactForm">
       <div class="modal__content">
           <div class="line-one__modal">
               <h3>Adicionar Novo Contato</h3>
@@ -25,27 +25,27 @@
           <div class="line-two__modal">
               <div class="div__field">
                   <label for="contactName">Nome: *</label>
-                  <input type="text" id="contactName" [(ngModel)]="newContact.contactName" placeholder="Nome do Contato" />
+                  <input type="text" id="contactName" formControlName="contactName" placeholder="Nome do Contato" />
               </div>
               <div class="div__field">
                   <label for="contactEmail">Email:</label>
-                  <input type="email" id="contactEmail" [(ngModel)]="newContact.contactEmail" placeholder="Email" />
+                  <input type="email" id="contactEmail" formControlName="contactEmail" placeholder="Email" />
               </div>
               <div class="div__field">
                   <label for="contactCellPhone">Celular: *</label>
-                  <input type="text" id="contactCellPhone" [(ngModel)]="newContact.contactCellPhone" placeholder="Celular" />
+                  <input type="text" id="contactCellPhone" formControlName="contactCellPhone" placeholder="Celular" />
               </div>
               <div class="div__field">
                   <label for="contactTelephone">Telefone:</label>
-                  <input type="text" id="contactTelephone" [(ngModel)]="newContact.contactTelephone" placeholder="Telefone" />
+                  <input type="text" id="contactTelephone" formControlName="contactTelephone" placeholder="Telefone" />
               </div>
               <div class="div__field check">
                   <label for="contactFavorite">Favorito:</label>
-                  <input type="checkbox" id="contactFavorite" [(ngModel)]="newContact.contactYNFavorite" />
+                  <input type="checkbox" id="contactFavorite" formControlName="contactYNFavorite" />
               </div>
               <div class="div__field check">
                   <label for="contactActive">Ativo:</label>
-                  <input type="checkbox" id="contactActive" [(ngModel)]="newContact.contactYNActive" />
+                  <input type="checkbox" id="contactActive" formControlName="contactYNActive" />
               </div>
           </div>
           <div class="line-three__modal">

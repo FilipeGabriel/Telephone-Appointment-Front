@@ -1,26 +1,26 @@
 <div class="contact-card__container">
   <div class="card__shadow"></div>
   <div class="div__card" [ngClass]="{
-      'inactive-card': contactForm.value.contactYNActive === 0
+      'inactive-card': contactForm.value.contactYNActive === false
   }" (click)="openModal()">
     <div class="line-one__card">
       <div class="line-one__data" [ngClass]="{
-        'inactive-card-title': contactForm.value.contactYNActive === 0
+        'inactive-card-title': contactForm.value.contactYNActive === false
       }">
         <i class="fa-solid fa-star" [ngStyle]="{
-              color: contactForm.value.contactYNFavorite === 1 ? '#fff200' : '#494747'
+              color: contactForm.value.contactYNFavorite === true ? '#fff200' : '#494747'
             }"></i>
         <span>{{ contactForm.value.contactName }}</span>
       </div>
     </div>
     <div class="line-two__card data-format">
       <i class="fa-solid fa-mobile-screen"></i>
-      <span>{{ contactForm.value.contactCellPhone }}</span>
+      <span>{{ contactForm.value.contactCellPhone | phoneFormat }}</span>
     </div>
     <hr>
     <div class="line-three__card data-format">
       <i class="fa-solid fa-phone"></i>
-      <span>{{ contactForm.value.contactTelephone }}</span>
+      <span>{{ contactForm.value.contactTelephone | phoneFormat }}</span>
     </div>
     <hr>
     <div class="line-four__card data-format">
@@ -39,31 +39,53 @@
         <div class="modal__fields">
           <div class="div__field">
             <label for="contactName">Nome: *</label>
-            <input id="contactName" formControlName="contactName" type="text" />
+            <input id="contactName" formControlName="contactName" type="text" placeholder="Nome do Contato" />
           </div>
           <div class="div__field">
             <label for="contactEmail">Email:</label>
-            <input id="contactEmail" formControlName="contactEmail" type="email" />
+            <input id="contactEmail" formControlName="contactEmail" type="email" placeholder="Email" />
           </div>
           <div class="div__field">
             <label for="contactCellPhone">Celular: *</label>
-            <input id="contactCellPhone" formControlName="contactCellPhone" type="text" />
+            <input
+              type="text"
+              id="contactCellPhone"
+              [value]="contactForm.value.contactCellPhone | phoneFormat"
+              (input)="onPhoneInput($event, 'contactCellPhone')"
+              placeholder="Celular"
+            />
           </div>
           <div class="div__field">
             <label for="contactTelephone">Telefone:</label>
-            <input id="contactTelephone" formControlName="contactTelephone" type="text" />
+            <input
+              type="text"
+              id="contactTelephone"
+              [value]="contactForm.value.contactTelephone | phoneFormat"
+              (input)="onPhoneInput($event, 'contactTelephone')"
+              placeholder="Telefone"
+            />
+          </div>
+          <div class="div__field">
+            <label>Data de Registro:</label>
+            <input
+              type="text"
+              [value]="contactForm.value.contactDtRegistration | dateTimeFormat"
+              disabled
+              class="input-disabled"
+            />
           </div>
           <div class="div__field check">
             <label for="contactFavorite">Favorito</label>
-            <input type="checkbox" formControlName="contactYNFavorite" />
+            <input type="checkbox" formControlName="contactYNFavorite" formControlName="contactYNFavorite" />
           </div>
           <div class="div__field check">
             <label for="contactActive">Ativo</label>
-            <input type="checkbox" formControlName="contactYNActive" />
+            <input type="checkbox" formControlName="contactYNActive" formControlName="contactYNActive" />
           </div>
         </div>
         <div class="div__down">
           <button type="button" class="btn btn-primary" (click)="saveChanges()">Salvar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteContact()">Deletar</button>
           <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
         </div>
       </form>

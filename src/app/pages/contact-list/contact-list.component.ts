@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactCardComponent } from "../../components/contact-card/contact-card.component";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Contact } from '../../models/contact';
 import { CommonModule } from '@angular/common';
+import { ContactService } from '../../services/contact.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact-list',
@@ -14,64 +16,41 @@ import { CommonModule } from '@angular/common';
 
 export class ContactListComponent implements OnInit {
 
+  contactForm!: FormGroup;
   contacts: Contact[] = [];
   isModalVisible: boolean = false;
-  newContact: Contact = {
-    contactId: 0,
-    contactName: '',
-    contactEmail: '',
-    contactCellPhone: '',
-    contactTelephone: '',
-    contactYNFavorite: 0,
-    contactYNActive: 1,
-    contactDTRegistration: new Date().toISOString()
-  };
 
-  constructor() {}
+
+  constructor(
+    private fb: FormBuilder,
+    private contactService: ContactService,
+    private toastr: ToastrService
+  ) {
+    this.contactForm = this.fb.group({
+      contactName: [''],
+      contactEmail: [''],
+      contactCellPhone: [''],
+      contactTelephone: [''],
+      contactYNFavorite: false,
+      contactYNActive: true,
+    });
+  }
 
   ngOnInit(): void {
-    this.contacts = [
-      {
-        contactId: 1,
-        contactName: 'João Silva',
-        contactEmail: 'joao.silva@example.com',
-        contactCellPhone: '1234567890',
-        contactTelephone: '9876543210',
-        contactYNFavorite: 1,
-        contactYNActive: 0,
-        contactDTRegistration: new Date().toISOString()
-      },
-      {
-        contactId: 2,
-        contactName: 'Maria Oliveira',
-        contactEmail: 'maria.oliveira@example.com',
-        contactCellPhone: '2345678901',
-        contactTelephone: '8765432109',
-        contactYNFavorite: 0,
-        contactYNActive: 0,
-        contactDTRegistration: new Date().toISOString()
-      },
-      {
-        contactId: 3,
-        contactName: 'Carlos Souza',
-        contactEmail: 'carlos.souza@example.com',
-        contactCellPhone: '3456789012',
-        contactTelephone: '7654321098',
-        contactYNFavorite: 0,
-        contactYNActive: 1,
-        contactDTRegistration: new Date().toISOString()
-      },
-      {
-        contactId: 4,
-        contactName: 'Carlos Souza',
-        contactEmail: 'carlos.souza@example.com',
-        contactCellPhone: '3456789012',
-        contactTelephone: '7654321098',
-        contactYNFavorite: 1,
-        contactYNActive: 1,
-        contactDTRegistration: new Date().toISOString()
-      }
-    ];
+    this.getContactList();
+  }
+
+  getContactList() {
+    this.contactService
+        .getContactsByUserId()
+        .subscribe({
+          next: (response) => {
+            this.contacts = response;
+          },
+          error: (error) => {
+            this.toastr.error('Não foi possível carregar os contatos');
+          }
+    });
   }
 
   openModal(): void {
@@ -84,26 +63,37 @@ export class ContactListComponent implements OnInit {
   }
 
   saveContact(): void {
-    const newContactId = this.contacts.length + 1;
-    const newContact = { ...this.newContact, contactId: newContactId };
-    this.contacts.push(newContact);
+    const contact = {
+      ...this.contactForm.value,
+      contactYNFavorite: this.contactForm.value.contactYNFavorite ? 1 : 0,
+      contactYNActive: this.contactForm.value.contactYNActive ? 1 : 0
+    };
+
+    this.contactService
+        .insertContact(contact)
+        .subscribe({
+          next: (response) => {
+            this.toastr.success('Contato cadastrado!');
+            this.getContactList();
+            this.closeModal();
+          },
+          error: (error) => {
+            console.log(error)
+            this.toastr.error('erro');
+          }
+    });
+
     this.closeModal();
   }
 
   resetNewContact(): void {
-    this.newContact = {
-      contactId: 0,
-      contactName: '',
-      contactEmail: '',
-      contactCellPhone: '',
-      contactTelephone: '',
-      contactYNFavorite: 0,
-      contactYNActive: 1,
-      contactDTRegistration: new Date().toISOString()
-    };
-  }
-
-  handleContactUpdated(updatedContact: Contact): void {
-    console.log('Contato atualizado:', updatedContact);
+    this.contactForm = this.fb.group({
+      contactName: [''],
+      contactEmail: [''],
+      contactCellPhone: [''],
+      contactTelephone: [''],
+      contactYNFavorite: false,
+      contactYNActive: true,
+    });
   }
 }

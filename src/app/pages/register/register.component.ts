@@ -26,7 +26,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       userEmail: [''],
       userPassword: ['']
-    })
+    });
   }
 
   signUp() {
@@ -52,7 +52,7 @@ export class RegisterComponent {
               this.toastr.error(error.error.message);
             }
           }
-    })
+    });
   }
 
 }

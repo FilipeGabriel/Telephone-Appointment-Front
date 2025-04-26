@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,14 +18,13 @@ export class ChangePasswordComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private userService: UserService,
     private toastr: ToastrService
   ) {
     this.cgForm = this.fb.group({
       userPassword: [''],
       userNewPassword: ['']
-    })
+    });
   }
 
   changePwd(){
@@ -51,6 +49,6 @@ export class ChangePasswordComponent {
               this.toastr.error(error.error.message);
             }
           }
-    })
+    });
   }
 }

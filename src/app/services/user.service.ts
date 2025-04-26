@@ -10,13 +10,13 @@ import { AuthService } from './auth.service';
 
 export class UserService {
 
+  apiUrlBase: string = environment.apiUrlBase + '/v1/api/users';
+  userId: string | null = this.authService.getUserId();
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
   ) { }
-
-  apiUrlBase: string = environment.apiUrlBase + '/v1/api/users';
-  userId: string | null = this.authService.getUserId();
 
   getUserById(): Observable<any> {
     return this.http.get<any>(`${this.apiUrlBase}/${this.userId}`);
