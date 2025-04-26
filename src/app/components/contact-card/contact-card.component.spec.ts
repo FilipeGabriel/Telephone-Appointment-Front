@@ -11,7 +11,7 @@ describe('ContactCardComponent', () => {
       imports: [ContactCardComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ContactCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

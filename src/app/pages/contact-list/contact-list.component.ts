@@ -18,8 +18,9 @@ export class ContactListComponent implements OnInit {
 
   contactForm!: FormGroup;
   contacts: Contact[] = [];
+  filteredContacts: Contact[] = [];
   isModalVisible: boolean = false;
-
+  searchTerm: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +47,7 @@ export class ContactListComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.contacts = response;
+            this.filteredContacts = [...response];
           },
           error: (error) => {
             this.toastr.error('Não foi possível carregar os contatos');
@@ -78,8 +80,7 @@ export class ContactListComponent implements OnInit {
             this.closeModal();
           },
           error: (error) => {
-            console.log(error)
-            this.toastr.error('erro');
+            this.toastr.error('Erro ao salvar contato.');
           }
     });
 
@@ -87,13 +88,40 @@ export class ContactListComponent implements OnInit {
   }
 
   resetNewContact(): void {
-    this.contactForm = this.fb.group({
-      contactName: [''],
-      contactEmail: [''],
-      contactCellPhone: [''],
-      contactTelephone: [''],
+    this.contactForm.reset({
+      contactName: '',
+      contactEmail: '',
+      contactCellPhone: '',
+      contactTelephone: '',
       contactYNFavorite: false,
       contactYNActive: true,
     });
+  }
+
+  onSearchChange() {
+    const term = this.removeAccents(this.searchTerm.toLowerCase().trim());
+
+    if (!term) {
+      this.filteredContacts = [...this.contacts];
+      return;
+    }
+
+    this.filteredContacts = this.contacts.filter(contact => {
+      const name = this.removeAccents(contact.contactName?.toLowerCase() || '');
+      const email = this.removeAccents(contact.contactEmail?.toLowerCase() || '');
+      const cellPhone = (contact.contactCellPhone || '').replace(/\D/g, '');
+      const telephone = (contact.contactTelephone || '').replace(/\D/g, '');
+
+      return (
+        name.includes(term) ||
+        email.includes(term) ||
+        cellPhone.includes(term) ||
+        telephone.includes(term)
+      );
+    });
+  }
+
+  removeAccents(value: string): string {
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 }
