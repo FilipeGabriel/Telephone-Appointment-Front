@@ -30,10 +30,6 @@ export class AuthService {
       return this.http.put(`${this.apiUrlBase}/${this.getUserId()}`, credentials);
   }
 
-  getUserById(): Observable<any> {
-      return this.http.get<any>(`${this.apiUrlBase}/${this.getUserId()}`);
-  }
-
   logout(): void {
       localStorage.removeItem('access_token');
       localStorage.removeItem('user_id');

@@ -21,7 +21,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router:Router,
-        private toastr: ToastrService
+    private toastr: ToastrService
   ){
     this.registerForm = this.fb.group({
       userEmail: [''],
@@ -52,7 +52,7 @@ export class RegisterComponent {
               this.toastr.error(error.error.message);
             }
           }
-        })
+    })
   }
 
 }
