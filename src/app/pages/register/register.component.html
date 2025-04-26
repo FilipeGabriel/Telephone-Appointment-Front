@@ -1,4 +1,4 @@
-<div class="register__container">
+<div class="register__container" [formGroup]="registerForm">
   <div class="card">
     <div class="card-title">
       <h2>Cadastre-se</h2>
@@ -6,12 +6,12 @@
     <div class="card-body">
         <div class="register__fields">
           <label>Email: *</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" formControlName="userEmail" />
           <label>Senha: *</label>
-          <input type="password" class="form-control" />
+          <input type="password" class="form-control" formControlName="userPassword" />
         </div>
       <div class="register__button-register">
-        <button class="btn btn-primary">Cadastrar</button>
+        <button class="btn btn-primary" (click)="signUp()">Cadastrar</button>
         <button class="btn btn-warning" routerLink="/login">Voltar</button>
       </div>
     </div>

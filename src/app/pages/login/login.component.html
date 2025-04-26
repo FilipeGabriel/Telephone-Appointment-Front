@@ -1,18 +1,18 @@
-<div class="login__container">
+<div class="login__container" [formGroup]="loginForm">
   <div class="card">
     <div class="card-title">
       <h2>Login</h2>
     </div>
     <div class="card-body">
-        <div class="login__fields">
-          <label>Email:</label>
-          <input type="text" class="form-control" />
-          <label>Senha:</label>
-          <input type="password" class="form-control" />
+      <form (ngSubmit)="onSubmit()" class="login__fields">
+        <label>Email:</label>
+        <input type="text" class="form-control" formControlName="userEmail" />
+        <label>Senha:</label>
+        <input type="password" class="form-control" formControlName="userPassword" />
+        <div class="login__button-login">
+          <button class="btn btn-warning" (click)="onSubmit()">Acessar</button>
         </div>
-      <div class="login__button-login">
-        <button class="btn btn-warning" routerLink="/home/contact-list">Acessar</button>
-      </div>
+      </form>
     </div>
     <div class="card-footer">
       <a routerLink="/register">Cadastre-se aqui!</a>
